@@ -11,6 +11,7 @@ public class Btree {
         String model;
         String year;
         String color;
+        
 
         // directions
         public Node left = null;
@@ -30,10 +31,14 @@ public class Btree {
 
     public Node root;
 
+    // counter
+    static int c = -1;
+    
     public Btree() {
         root = null;
+        c++;
     }
-
+    
     // function to create and insert new node
     public void insert(int key, String make, String model,
             String year, String color) {
@@ -80,7 +85,7 @@ public class Btree {
     public Node find(int key) {
 
         Node current = root;
-
+        
         // check if tree is empty
         if (root == null) {
             return null;
@@ -90,9 +95,11 @@ public class Btree {
 
             if (key < current.key) { //go left
                 current = current.left;
+                c++;
                 
             } else { // go right
-                current = current.right;      
+                current = current.right; 
+                c++;
             }
             
             if (current == null) {
