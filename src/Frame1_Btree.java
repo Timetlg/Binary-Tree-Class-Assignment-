@@ -22,6 +22,8 @@ public class Frame1_Btree extends javax.swing.JFrame {
         jComboYear.setSelectedIndex(0);
         carColor();
         jComboColor.setSelectedIndex(0);
+        
+        
 
         // ai originally suggested to use one as set selected index, but I decided to do all,
         // this can prevent you from entering a null answer into the tree
@@ -46,6 +48,7 @@ public class Frame1_Btree extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTxtArea = new javax.swing.JTextArea();
         jBttnDisplay = new javax.swing.JButton();
+        jBttnDelete = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
@@ -102,28 +105,41 @@ public class Frame1_Btree extends javax.swing.JFrame {
 
         jBttnDisplay.setText("Display Info");
 
+        jBttnDelete.setText("Delete");
+        jBttnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBttnDeleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
+                        .addGap(56, 56, 56)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboYear, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboMake, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboColor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jBttnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jComboYear, 0, 89, Short.MAX_VALUE)
+                                    .addComponent(jComboMake, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jComboColor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(jComboModel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jComboModel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap()
+                        .addComponent(jBttnDelete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBttnAdd)))
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -162,9 +178,11 @@ public class Frame1_Btree extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBttnAdd)
-                .addGap(151, 151, 151))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBttnAdd)
+                    .addComponent(jBttnDelete))
+                .addGap(145, 145, 145))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -196,46 +214,67 @@ public class Frame1_Btree extends javax.swing.JFrame {
         String color = (String) jComboColor.getSelectedItem();
 
         // make unique hash key
-        String key = (make + model + year + color);
+        int key = (make + model + year + color).hashCode();
 
         // TODO - Check if hashcode is duplicate then make it a positive or negative or even add one
-        tree.insert(key.hashCode(), make, model, year, color);
-        System.out.println(key.hashCode());
+        tree.insert(key, make, model, year, color);
+        System.out.println(key);
     }//GEN-LAST:event_jBttnAddActionPerformed
 
     private void jBttnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnFindActionPerformed
 
         // take the string from user input and turn it into an integer
-        try{
-            
-        int key = Integer.parseInt(jTxtField.getText());
-        Btree.Node result = tree.find(key);
+        try {
 
-        // instead of having print to console, ai helped me put it into the textarea
-        // by suggesting how it should be done
-        if(result == null){
-            
-           jTxtArea.setText("*** Key Not Found or Tree is Empty ***");
-        } else {
-            jTxtArea.setText(
-            "Key Found!\n\n" +
-            "Key: " + result.key + "\n" +
-            "Make: " + result.make + "\n" +
-            "Model: " + result.model + "\n" + 
-            "Year: " + result.year + "\n" + 
-            "Color: " + result.color + "\n\n" +
-            "Levels: " + Btree.c
-            );
-        }
-        
-        }catch(Exception e){
-            
+            int key = Integer.parseInt(jTxtField.getText());
+            Btree.Node result = tree.find(key);
+
+            // instead of having print to console, ai helped me put it into the textarea
+            // by suggesting how it should be done
+            if (result == null) {
+
+                jTxtArea.setText("*** Key Not Found or Tree is Empty ***");
+            } else {
+                jTxtArea.setText(
+                        "Key Found!\n\n"
+                        + "Key: " + result.key + "\n"
+                        + "Make: " + result.make + "\n"
+                        + "Model: " + result.model + "\n"
+                        + "Year: " + result.year + "\n"
+                        + "Color: " + result.color + "\n\n"
+                        + "Levels: " + Btree.c
+                );
+            }
+
+        } catch (Exception e) {
+
             jTxtArea.setText("*ERROR* \n Please input only numbers");
         }
-        
-        
+
 
     }//GEN-LAST:event_jBttnFindActionPerformed
+
+    private void jBttnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnDeleteActionPerformed
+
+        String make = (String) jComboMake.getSelectedItem();
+        String model = (String) jComboModel.getSelectedItem();
+        String year = (String) jComboYear.getSelectedItem();
+        String color = (String) jComboColor.getSelectedItem();
+
+        // make unique hash key
+        int key = (make + model + year + color).hashCode();
+        
+        Btree.Node result = tree.delete(key);
+        
+        if(result == null){
+            jTxtArea.setText("*** Key not found or tree is empty");
+        }
+        else{
+            jTxtArea.setText("Successfully found and deleted: \n" + result.year + " " +
+                    result.color + " " + result.make + " " + result.model);
+        }
+
+    }//GEN-LAST:event_jBttnDeleteActionPerformed
 
     private void carMake() {
         jComboMake.removeAllItems();
@@ -313,6 +352,7 @@ public class Frame1_Btree extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBttnAdd;
+    private javax.swing.JButton jBttnDelete;
     private javax.swing.JButton jBttnDisplay;
     private javax.swing.JButton jBttnFind;
     private javax.swing.JComboBox<String> jComboColor;
