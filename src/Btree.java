@@ -81,6 +81,7 @@ public class Btree {
         }
     } // End of insert
 
+    // function to find a key based on integer input
     public Node find(int key) {
 
         Node current = root;
@@ -90,6 +91,7 @@ public class Btree {
             return null;
         }
 
+        // while current isnt key keep going
         while (current.key != key) {
 
             if (key < current.key) { //go left
@@ -108,6 +110,7 @@ public class Btree {
         return current;
     } // End of Find
     
+    // function to get maximum key
     public Node highestKey(){
         
         Node current = root;
@@ -120,6 +123,7 @@ public class Btree {
         return current;
     }
     
+    // function to get minimum key
     public Node lowestKey(){
         
         Node current = root;
@@ -132,6 +136,8 @@ public class Btree {
         return current;
     }
 
+    // function to delete data point
+    // based on the selected combo boxes
     public Node delete(int key) {
 
         Node current = root;
@@ -225,6 +231,7 @@ public class Btree {
 
     } // End of Delete
 
+    // this function works with delete function to rotate data
     private Node getSuccessor(Node deleteNode) {
 
         Node successorParent = deleteNode;

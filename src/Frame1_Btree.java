@@ -8,6 +8,7 @@ public class Frame1_Btree extends javax.swing.JFrame {
 
         tree = new Btree();
 
+        // jframe setup
         this.setLocationRelativeTo(null);
         this.setTitle("Cars Binary Tree");
         this.setDefaultCloseOperation(Frame1_Btree.EXIT_ON_CLOSE);
@@ -274,6 +275,7 @@ public class Frame1_Btree extends javax.swing.JFrame {
 
     private void jBttnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnDeleteActionPerformed
 
+           // button action to delete a data point and print into txt area
         String make = (String) jComboMake.getSelectedItem();
         String model = (String) jComboModel.getSelectedItem();
         String year = (String) jComboYear.getSelectedItem();
@@ -284,6 +286,7 @@ public class Frame1_Btree extends javax.swing.JFrame {
 
         Btree.Node result = tree.delete(key);
 
+        // printing to txt area
         if (result == null) {
             jTxtArea.setText("*** Key not found or tree is empty");
         } else {
@@ -300,19 +303,23 @@ public class Frame1_Btree extends javax.swing.JFrame {
 
     private void jBttnHighActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnHighActionPerformed
 
+        // finding the maximum key in tree
         Btree.Node result = tree.highestKey();
 
+        // print to txt area
         jTxtArea.setText("Highest Key: \n"
                 + result.year + " "
                 + result.color + " "
                 + result.make + " "
                 + result.model + "\n"
                 + "Levels: " + Btree.c);
+        // set levels counter to 0
         Btree.c = 0;
     }//GEN-LAST:event_jBttnHighActionPerformed
 
     private void jBttnLowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBttnLowActionPerformed
 
+        // find and print lowest key
         Btree.Node result = tree.lowestKey();
 
         jTxtArea.setText("Lowest Key: \n"
@@ -325,6 +332,7 @@ public class Frame1_Btree extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jBttnLowActionPerformed
 
+    // function to add options to combo boxes
     private void carMake() {
         jComboMake.removeAllItems();
 
@@ -335,7 +343,8 @@ public class Frame1_Btree extends javax.swing.JFrame {
 
     }
 
-    // function that shows which model for make based on which one is selected
+    // function that shows which model for make 
+    // based on which one is selected
     private void carModel() {
 
         String item = jComboMake.getSelectedItem() + "";
