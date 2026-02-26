@@ -107,6 +107,30 @@ public class Btree {
         }
         return current;
     } // End of Find
+    
+    public Node highestKey(){
+        
+        Node current = root;
+        
+        while(current.right != null){
+            
+            current = current.right;
+            c++;
+        }
+        return current;
+    }
+    
+    public Node lowestKey(){
+        
+        Node current = root;
+        
+        while(current.left != null){
+            
+            current = current.left;
+            c++;
+        }
+        return current;
+    }
 
     public Node delete(int key) {
 
@@ -126,6 +150,7 @@ public class Btree {
         while (current.key != key) {
 
             parent = current;
+            c++;
 
             if (key < current.key) {
 
