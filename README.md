@@ -20,7 +20,6 @@ The binary tree supports the following operations:
 - Delete a data point from the tree
 - Display the highest key (maximum) and its visit / level count
 - Display the lowest key (minimum) and its visit / level count
-- Visualize the binary tree structure in the console
 
 ---
 
