@@ -30,7 +30,7 @@ public class Btree {
 
     public Node root;
 
-    // counter
+    // counter for levels
     static int c = -1;
 
     public Btree() {
