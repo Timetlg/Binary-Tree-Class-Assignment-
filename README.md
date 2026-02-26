@@ -12,7 +12,7 @@ The project demonstrates fundamental binary tree operations, traversal logic, an
 The binary tree supports the following operations:
 
 - Generate random car objects (color, year, make, model)
-- Create a unique key for each car using `hashCode()`
+- Create a key for each car using `hashCode()`
 - Add a data point to the binary tree
 - Find a data point using its key
 - Display stored car information
@@ -20,7 +20,6 @@ The binary tree supports the following operations:
 - Delete a data point from the tree
 - Display the highest key (maximum) and its visit / level count
 - Display the lowest key (minimum) and its visit / level count
-- Visualize the binary tree structure in the console
 
 ---
 
